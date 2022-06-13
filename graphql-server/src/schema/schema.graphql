@@ -1,0 +1,13 @@
+type Query {
+  helloWorld: String!
+  getRegister(id: ID!): Register
+  listRegister: [Register]
+}
+
+type Register {
+  id: ID!
+  name: String!
+  cep: String!
+  phone: String!
+  cpf: String!
+}

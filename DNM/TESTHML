@@ -1,0 +1,151 @@
+package ampli.financial.quotation
+
+import ampli.commons.entity.Address
+import ampli.commons.entity.Phone
+import ampli.commons.entity.enums.Gender
+import ampli.commons.entity.enums.MaritalStatus
+import ampli.commons.test.RandomDataGenerator
+import ampli.course.grpc.Course
+import ampli.enrollment.grpc.CourseEnrollment
+import ampli.financial.candidate.CandidateStub
+import ampli.financial.config.KafkaProducerConfig
+import ampli.financial.grpc.PaymentMethod
+import ampli.financial.plan.PaymentPlan
+import ampli.locale.grpc.City
+import ampli.locale.grpc.Country
+import ampli.locale.grpc.State
+import ampli.registration.grpc.CandidateExamGrade
+import ampli.registration.grpc.CandidateStatus
+import java.math.BigDecimal
+import java.time.LocalDate
+import java.time.LocalDateTime
+
+fun start(
+    kafkaProducerConfig: KafkaProducerConfig<QuotationDto>
+) {
+    val paymentPlan = PaymentPlan(
+        studentId = "08e440cb-58d4-4e25-80be-628fc345aaa4",
+        courseId = "037e71b1-8da6-4763-8837-8ef825c01290",
+        coursePriceId = "ec432b6d-46d8-4120-993a-6e2647818292",
+        enrollmentId = "623a0a8f-7f78-47f0-8745-cd34da4ccca8",
+        amount = BigDecimal("149.99"),
+        billingDay = 25,
+        paymentMethod = PaymentMethod.BOLETO,
+        numberOfInstalments = 12,
+        recurring = false,
+        recurringChargeId = null,
+        recurringCreditCardId = null,
+        couponCode = null,
+        couponNumberOfInstalments = null
+    )
+
+    val candidateStub = CandidateStub(
+        id = "c010a8c7-0294-4440-a716-fc1d0e3712be",
+        studentId = "fed339a7-ca32-4387-a8f4-4b485551f3c7",
+        status = CandidateStatus.ENROLLED,
+        fullName = "Joe Doe",
+        birthDate = LocalDate.of(1970, 1, 1),
+        mobilePhone = Phone.of("(11) 98888-7777"),
+        gender = Gender.OTHER,
+        maritalStatus = MaritalStatus.MARRIED,
+        cityOfBirthId = 1,
+        document = "28792461646",
+        email = "no.matter@ampli.com.br",
+        address = Address(
+        postalCode = "00001-101",
+        street = "Street With No Name",
+        number = "0",
+        complement = "Ap. 1",
+        neighbourhood = "Wherever",
+        cityId = 3550308,
+        stateId = 35
+    ),
+        nationalIdentityStateId = RandomDataGenerator.int(),
+        enemOption = false,
+        startDate = LocalDate.of(2021, 1, 1)
+    )
+
+    kafkaProducerConfig.quotation.send(QuotationDto(
+        paymentPlan,
+        candidateStub,
+        candidateExamGrade = CandidateExamGrade.getDefaultInstance(),
+        cityAddress = City.getDefaultInstance(),
+        cityOrigen = City.getDefaultInstance(),
+        countryAddress = Country.getDefaultInstance(),
+        countryOrigin = Country.getDefaultInstance(),
+        course = Course.getDefaultInstance(),
+        courseEnrollment = CourseEnrollment.getDefaultInstance(),
+        stateAddress = State.getDefaultInstance(),
+        stateIdentity = State.getDefaultInstance(),
+        courseDuration = 1,
+        courseStart = LocalDateTime.parse("2016-03-04 11:30")
+        
+        
+        04693174262
+00093713118
+06069182308
+00599312726
+03740564121
+61120305357
+08250226577
+02764557620
+00795276982
+93609434104
+02329571500
+01809716039
+28823041880
+05448671730
+02663418293
+06792563340
+04010372079
+03910125689
+06004848905
+14097188917
+02135285170
+22285450826
+07468969728
+08818373692
+03402821184
+06777398937
+75536056972
+01825207909
+76910733215
+01883633273
+02361099284
+04123144284
+01911877208
+01729777465
+04993553188
+03860457551
+01305495500
+59006269204
+93835680382
+03272821503
+06913004109
+02795249006
+14390863975
+03019471125
+08359602506
+11851680446
+04616226458
+42827337053
+99478986600
+05346603719
+01926316088
+05458629140
+08074343456
+08206536590
+29648536813
+61276630328
+09919744840
+05454631140
+08397593632
+07403875370
+90133498204
+04538283100
+04135819001
+33487843870
+06404437104
+    ))
+}
+

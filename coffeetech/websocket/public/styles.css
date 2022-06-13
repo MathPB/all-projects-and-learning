@@ -1,0 +1,48 @@
+.title-park {
+    margin-top: 20vh;
+}
+
+.centralize-slection {
+    display: flex;
+    justify-content: center;
+}
+
+.centralize-grid {
+    display: grid;
+}
+
+.spacing-bottom {
+    margin-bottom: 4vh;
+}
+
+.spacing-btn-top {
+    margin-top: 2vh;
+}
+
+.format-input {
+    border-radius: 50%;
+}
+
+.font-label {
+    font-weight: 900;
+    padding-bottom: 3px;
+}
+
+.placa-text {
+    text-transform: uppercase;
+}
+
+.parking-location {
+    border: 3px solid yellow; 
+    height: 35vh; 
+    width: 13vw; 
+    text-align: center;
+    font-weight: bold;
+    margin-right: 4vw;
+}
+
+.centralize-parking {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 10vh;
+}

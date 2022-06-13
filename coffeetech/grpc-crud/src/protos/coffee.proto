@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+
+service CoffeeService {
+    rpc List (Empty) returns (CoffeeList) {}
+    rpc Insert (Coffee) returns (Coffee) {}
+    rpc Delete (CoffeeRequestId) returns (Coffee) {}
+}
+
+message Empty {}
+
+message MembersCoffee {
+    string id = 1;
+    string name = 2;
+}
+
+message Coffee {
+    string id = 1;
+    string title = 2;
+    repeated MembersCoffee members = 3;
+}
+
+message CoffeeList {
+    repeated Coffee coffees = 1;
+}
+
+message CoffeeRequestId {
+    string id = 1;
+}
